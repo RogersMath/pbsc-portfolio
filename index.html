@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of educational games, presentations, and research by Jesse J. Rogers at Palm Beach State College.">
+    <meta name="author" content="Jesse J. Rogers, Palm Beach State College">
+    <title>PBSC Portfolio | Jesse J. Rogers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* PBSC Brand Colors - AAA compliant */
+            --pbsc-blue: #002855;
+            --pbsc-blue-light: #003d7a;
+            --pbsc-green: #006b42;
+            --pbsc-gold: #c08600;
+            
+            /* Additional palette */
+            --page-bg: #f8f6f3;
+            --dark-text: #000000;
+            --light-text: #ffffff;
+            --subtle-text: #4a4a4a;
+            --accent-red: #8b1a1a;
+            --border-color: #cccccc;
+            --focus-color: #005a9c;
+            
+            /* Typography scale */
+            --display-font: 'Playfair Display', Georgia, serif;
+            --body-font: 'Source Serif 4', Georgia, serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--body-font);
+            background-color: var(--page-bg);
+            color: var(--dark-text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Skip to main content link */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: var(--pbsc-blue);
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 9999;
+            border-radius: 0 0 4px 0;
+        }
+
+        .skip-link:focus {
+            top: 0;
+            outline: 4px solid var(--pbsc-gold);
+            outline-offset: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--pbsc-blue) 0%, #001a3a 50%, var(--pbsc-green) 100%);
+            color: var(--light-text);
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.03) 2px,
+                    rgba(255, 255, 255, 0.03) 4px
+                );
+            pointer-events: none;
+            animation: scanlines 8s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            text-align: center;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: var(--display-font);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-byline {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Section Styling */
+        section {
+            margin: 4rem 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-header {
+            font-family: var(--display-font);
+            font-size: 2.5rem;
+            color: var(--pbsc-blue);
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pbsc-blue), var(--pbsc-green), var(--pbsc-gold));
+            border-radius: 2px;
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: white;
+            border: 4px solid var(--pbsc-blue);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 40, 85, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--pbsc-blue), var(--pbsc-green), var(--pbsc-gold));
+            border-radius: 8px 8px 0 0;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 40, 85, 0.2);
+            border-color: var(--pbsc-green);
+            transform: translateY(-8px);
+        }
+
+        .project-card h3 {
+            font-family: var(--display-font);
+            font-size: 1.5rem;
+            color: var(--pbsc-blue);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: var(--pbsc-gold);
+            color: var(--light-text);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-tag.presentation {
+            background: var(--pbsc-blue);
+        }
+
+        .project-tag.game {
+            background: var(--pbsc-green);
+        }
+
+        .project-tag.research {
+            background: var(--accent-red);
+        }
+
+        .project-tag.interactive {
+            background: var(--pbsc-gold);
+        }
+
+        /* Project Link Button */
+        .project-link {
+            display: inline-block;
+            background: transparent;
+            color: var(--dark-text);
+            border: 3px solid var(--pbsc-blue);
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--pbsc-blue);
+            transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+        }
+
+        .project-link:hover {
+            color: var(--light-text);
+            border-color: var(--pbsc-blue);
+            box-shadow: 0 4px 16px rgba(0, 40, 85, 0.3);
+        }
+
+        .project-link:hover::before {
+            left: 0;
+        }
+
+        .project-link:focus-visible {
+            outline: 4px solid var(--pbsc-gold);
+            outline-offset: 4px;
+        }
+
+        /* About Section */
+        .about-section {
+            background: var(--pbsc-blue);
+            color: var(--light-text);
+            padding: 3rem;
+            margin: 4rem -2rem;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section h2 {
+            font-family: var(--display-font);
+            font-size: 2.2rem;
+            color: var(--pbsc-gold);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .about-section p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .about-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--pbsc-blue);
+            color: var(--light-text);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 6px solid var(--pbsc-gold);
+        }
+
+        footer p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: var(--light-text);
+            font-weight: 600;
+            text-decoration: underline;
+            transition: all 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--pbsc-gold);
+        }
+
+        footer a:focus-visible {
+            outline: 4px solid var(--light-text);
+            outline-offset: 4px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section {
+                margin-left: -1rem;
+                margin-right: -1rem;
+                padding: 2rem;
+            }
+
+            main {
+                padding: 2rem 1rem;
+            }
+
+            .section-header {
+                font-size: 2rem;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .project-card {
+                border-width: 6px;
+            }
+            
+            .project-link {
+                border-width: 5px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .skip-link,
+            .scroll-indicator {
+                display: none;
+            }
+
+            .hero {
+                background: white;
+                color: black;
+                min-height: auto;
+                page-break-after: always;
+            }
+
+            .about-section {
+                background: white;
+                color: black;
+                border: 4px solid black;
+            }
+
+            a[href^="http"]:after {
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>PBSC Portfolio</h1>
+            <p class="hero-subtitle">Educational Games, Presentations & Research</p>
+            <p class="hero-byline">
+                Jesse J. Rogers<br>
+                Learning Lab Coordinator<br>
+                Palm Beach State College
+            </p>
+        </div>
+        <div class="scroll-indicator" aria-hidden="true">↓ Scroll to explore ↓</div>
+    </section>
+
+    <main id="main-content">
+
+        <!-- Presentations Section -->
+        <section>
+            <h2 class="section-header">Presentations</h2>
+            <div class="project-grid">
+                <article class="project-card">
+                    <span class="project-tag presentation">Presentation</span>
+                    <h3>Fighting Fake News With Games</h3>
+                    <p>A Liberal Arts Conference presentation exploring the ethics of using AI and game design to combat disinformation, political manipulation, and election interference. Features interactive examples and reflection questions about art, AI, and democratic resilience.</p>
+                    <a href="https://rogersmath.github.io/pbsc-lac2026/" 
+                       class="project-link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="View Fighting Fake News With Games presentation (opens in new window)">
+                        View Presentation
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-tag presentation">Workshop</span>
+                    <h3>Math Strategies Workshop</h3>
+                    <p>Interactive workshop presented to students who sign up for the Math Success Orientation service on Navigate. Covers evidence-based learning strategies, cognitive science principles, and practical techniques for mathematical success.</p>
+                    <a href="https://rogersmath.github.io/pbsc-strategies/" 
+                       class="project-link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="View Math Strategies Workshop (opens in new window)">
+                        View Workshop
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-tag research">Research</span>
+                    <h3>AI Tutoring and the Two Sigma Problem</h3>
+                    <p>A comprehensive literature review examining how AI tutoring systems address Bloom's Two Sigma Problem. Claude-assisted research paper exploring personalized learning at scale, referenced within the Math Strategies Workshop.</p>
+                    <a href="https://rogersmath.github.io/paper1/" 
+                       class="project-link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Read AI Tutoring research paper (opens in new window)">
+                        Read Research
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Interactive Tools Section -->
+        <section>
+            <h2 class="section-header">Interactive Tools</h2>
+            <div class="project-grid">
+                <article class="project-card">
+                    <span class="project-tag interactive">Interactive</span>
+                    <h3>Self Talk Reframer</h3>
+                    <p>A multiple-choice interactive tool that helps students practice reframing negative self-talk. Players select from better and worse ways to interpret challenging situations, promoting growth mindset through guided practice and immediate feedback.</p>
+                    <a href="https://rogersmath.github.io/reframe/" 
+                       class="project-link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Try Self Talk Reframer tool (opens in new window)">
+                        Try Tool
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Educational Games Section -->
+        <section>
+            <h2 class="section-header">Educational Games</h2>
+            <div class="project-grid">
+                <article class="project-card">
+                    <span class="project-tag game">Game</span>
+                    <h3>Prime Hunter: Math Asteroids</h3>
+                    <p>An arcade-style game teaching number theory through gameplay. Shoot red composite-numbered asteroids to break them into their prime factors, and collect blue prime-numbered asteroids. Learn mathematical concepts through action and strategy.</p>
+                    <a href="https://rogersmath.itch.io/prime-hunter" 
+                       class="project-link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Play Prime Hunter game on itch.io (opens in new window)">
+                        Play Game
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <span class="project-tag game">Game</span>
+                    <h3>Reactor Core</h3>
+                    <p>Generate energy for your ship by solving algebraic equations in the x + a = b format. Practice inverse operations by selecting opposite-colored cards to cancel values efficiently. Visual equation solving meets strategic resource management.</p>
+                    <a href="https://rogersmath.github.io/pbsc-reactor-core/" 
+                       class="project-link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Play Reactor Core game (opens in new window)">
+                        Play Game
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <h2>About This Work</h2>
+            <p>These projects represent an exploration of how AI-assisted development can amplify educational impact. As a Learning Lab Coordinator with 20 years of education experience, I've combined pedagogical expertise with modern development tools to create resources that would traditionally require large teams and extended timelines.</p>
+            <p>Each project demonstrates a different approach to learning: some teach through direct practice, others through strategic gameplay, and still others through reflection and metacognition. Together, they form a portfolio of evidence-based educational interventions accessible to students at Palm Beach State College and beyond.</p>
+            <p>All game projects are open source and available for adaptation, forking, and community development under MIT licenses.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p><strong>Jesse J. Rogers</strong><br>
+        Learning Lab Coordinator<br>
+        Palm Beach State College</p>
+        <p>Visit: <a href="https://pbsc.edu/slc/" target="_blank" rel="noopener noreferrer" aria-label="Student Learning Center (opens in new window)">Student Learning Center</a></p>
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">All projects built with accessibility in mind, following WCAG 2.1 AAA standards</p>
+    </footer>
+
+</body>
+</html>
